@@ -1,1 +1,3 @@
-python-telegram-bot
+```text
+python-telegram-bot==20.7
+```
