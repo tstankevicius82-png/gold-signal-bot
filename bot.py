@@ -1,31 +1,178 @@
 from telegram import Update
-from telegram.ext import Application,CommandHandler,ContextTypes
+from telegram.ext import Application, CommandHandler, ContextTypes
 import os
 
-TOKEN=os.getenv("BOT_TOKEN")
+TOKEN = os.getenv("BOT_TOKEN")
+CHANNEL = "@CARYPTOGOLDEDGE"
 
-async def buy(update:Update,context:ContextTypes.DEFAULT_TYPE): entry=float(context.args[0]);tp1=entry+3;tp2=entry+5;tp3=entry+10;sl=entry-5;msg=f"📊 GOLD SIGNAL — XAU/USD\n\n🟢 BUY\n\n📍 Entry: {entry}\n🛑 Stop Loss: {sl}\n🎯 TP1: {tp1}\n🎯 TP2: {tp2}\n🎯 TP3: {tp3}\n\n#gold #xauusd"; await update.message.reply_text(msg)
+# BUY SIGNAL
 
-async def sell(update:Update,context:ContextTypes.DEFAULT_TYPE): entry=float(context.args[0]);tp1=entry-3;tp2=entry-5;tp3=entry-10;sl=entry+5;msg=f"📊 GOLD SIGNAL — XAU/USD\n\n🔴 SELL\n\n📍 Entry: {entry}\n🛑 Stop Loss: {sl}\n🎯 TP1: {tp1}\n🎯 TP2: {tp2}\n🎯 TP3: {tp3}\n\n#gold #xauusd"; await update.message.reply_text(msg)
+async def buy(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
-async def tp1(update:Update,context:ContextTypes.DEFAULT_TYPE): await update.message.reply_text("✅ TP1 HIT\n\n🔒 Stop Loss moved to Break Even.\n📈 Trade progressing well.")
+```
+entry = float(context.args[0])
 
-async def tp2(update:Update,context:ContextTypes.DEFAULT_TYPE): await update.message.reply_text("✅ TP2 HIT\n\n📈 Strong continuation.\nPartial profits secured.")
+tp1 = entry + 3
+tp2 = entry + 5
+tp3 = entry + 10
+sl = entry - 5
 
-async def tp3(update:Update,context:ContextTypes.DEFAULT_TYPE): await update.message.reply_text("🏁 TP3 HIT — TRADE CLOSED\n\n🔥 Full target achieved.")
+msg = f"""
+```
 
-async def be(update:Update,context:ContextTypes.DEFAULT_TYPE): await update.message.reply_text("🔒 Stop Loss moved to Break Even.")
+📊 GOLD SIGNAL — XAU/USD
 
-async def sl(update:Update,context:ContextTypes.DEFAULT_TYPE): await update.message.reply_text("❌ Stop Loss Hit\n\nRisk managed properly.")
+🟢 BUY
 
-app=Application.builder().token(TOKEN).build()
+━━━━━━━━━━━━
+📍 Entry: {entry}
+🛑 Stop Loss: {sl}
 
-app.add_handler(CommandHandler("buy",buy))
-app.add_handler(CommandHandler("sell",sell))
-app.add_handler(CommandHandler("tp1",tp1))
-app.add_handler(CommandHandler("tp2",tp2))
-app.add_handler(CommandHandler("tp3",tp3))
-app.add_handler(CommandHandler("be",be))
-app.add_handler(CommandHandler("sl",sl))
+🎯 TP1: {tp1}
+🎯 TP2: {tp2}
+🎯 TP3: {tp3}
+━━━━━━━━━━━━
+
+⚠️ Move SL to BE after TP1
+#gold #xauusd
+"""
+
+```
+await context.bot.send_message(chat_id=CHANNEL, text=msg)
+```
+
+# SELL SIGNAL
+
+async def sell(update: Update, context: ContextTypes.DEFAULT_TYPE):
+
+```
+entry = float(context.args[0])
+
+tp1 = entry - 3
+tp2 = entry - 5
+tp3 = entry - 10
+sl = entry + 5
+
+msg = f"""
+```
+
+📊 GOLD SIGNAL — XAU/USD
+
+🔴 SELL
+
+━━━━━━━━━━━━
+📍 Entry: {entry}
+🛑 Stop Loss: {sl}
+
+🎯 TP1: {tp1}
+🎯 TP2: {tp2}
+🎯 TP3: {tp3}
+━━━━━━━━━━━━
+
+⚠️ Move SL to BE after TP1
+#gold #xauusd
+"""
+
+```
+await context.bot.send_message(chat_id=CHANNEL, text=msg)
+```
+
+# TP1
+
+async def tp1(update: Update, context: ContextTypes.DEFAULT_TYPE):
+
+```
+msg = """
+```
+
+✅ TP1 HIT
+
+🔒 Stop Loss moved to Break Even
+📈 Trade progressing well
+"""
+
+```
+await context.bot.send_message(chat_id=CHANNEL, text=msg)
+```
+
+# TP2
+
+async def tp2(update: Update, context: ContextTypes.DEFAULT_TYPE):
+
+```
+msg = """
+```
+
+✅ TP2 HIT
+
+📈 Strong continuation
+💰 Partial profits secured
+"""
+
+```
+await context.bot.send_message(chat_id=CHANNEL, text=msg)
+```
+
+# TP3
+
+async def tp3(update: Update, context: ContextTypes.DEFAULT_TYPE):
+
+```
+msg = """
+```
+
+🏁 TP3 HIT — TRADE CLOSED
+
+🔥 Full target achieved
+"""
+
+```
+await context.bot.send_message(chat_id=CHANNEL, text=msg)
+```
+
+# BREAK EVEN
+
+async def be(update: Update, context: ContextTypes.DEFAULT_TYPE):
+
+```
+msg = """
+```
+
+🔒 Stop Loss moved to Break Even
+"""
+
+```
+await context.bot.send_message(chat_id=CHANNEL, text=msg)
+```
+
+# STOP LOSS
+
+async def sl(update: Update, context: ContextTypes.DEFAULT_TYPE):
+
+```
+msg = """
+```
+
+❌ Stop Loss Hit
+
+Risk managed properly.
+Waiting for next setup.
+"""
+
+```
+await context.bot.send_message(chat_id=CHANNEL, text=msg)
+```
+
+app = Application.builder().token(TOKEN).build()
+
+app.add_handler(CommandHandler("buy", buy))
+app.add_handler(CommandHandler("sell", sell))
+app.add_handler(CommandHandler("tp1", tp1))
+app.add_handler(CommandHandler("tp2", tp2))
+app.add_handler(CommandHandler("tp3", tp3))
+app.add_handler(CommandHandler("be", be))
+app.add_handler(CommandHandler("sl", sl))
+
+print("BOT RUNNING...")
 
 app.run_polling()
