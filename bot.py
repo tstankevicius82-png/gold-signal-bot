@@ -1,18 +1,17 @@
 ```python
 import os
-from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+from telegram.ext import ApplicationBuilder, CommandHandler
 
 TOKEN = os.getenv("BOT_TOKEN")
 
-async def buy(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def buy(update, context):
     await update.message.reply_text("🟢 BUY SIGNAL WORKING")
 
 app = ApplicationBuilder().token(TOKEN).build()
 
 app.add_handler(CommandHandler("buy", buy))
 
-print("BOT STARTED")
+print("BOT RUNNING")
 
 app.run_polling()
 ```
