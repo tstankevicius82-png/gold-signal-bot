@@ -1,9 +1,13 @@
+from telegram.ext import ApplicationBuilder, CommandHandler
 import os
-from telegram.ext import Updater,CommandHandler
-TOKEN=os.getenv("BOT_TOKEN")
-def buy(update,context): update.message.reply_text("BUY WORKING")
-updater=Updater(TOKEN,use_context=True)
-dp=updater.dispatcher
-dp.add_handler(CommandHandler("buy",buy))
-updater.start_polling()
-updater.idle()
+
+TOKEN = os.getenv("BOT_TOKEN")
+
+async def buy(update, context):
+await update.message.reply_text("BUY WORKING")
+
+app = ApplicationBuilder().token(TOKEN).build()
+
+app.add_handler(CommandHandler("buy", buy))
+
+app.run_polling()
