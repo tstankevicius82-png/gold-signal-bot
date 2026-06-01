@@ -11,4 +11,4 @@ async def sell(update:Update,context:ContextTypes.DEFAULT_TYPE): entry=float(con
 
 async def tp1(update:Update,context:ContextTypes.DEFAULT_TYPE): await context.bot.send_message(chat_id=CHANNEL,text="✅ TP1 HIT\n\n🔒 Stop Loss moved to Break Even\n📈 Trade progressing well")
 
-async def tp2(update:Update,context:ContextTypes.DEFAULT_TYPE): await context.bot.send_message(chat_id=CHANNEL,text="✅ TP2 HIT\n\n💰
+async def tp2(update:Update,context:ContextTypes.DEFAULT_TYPE): await context.bot.send_message(chat_id=CHANNEL,text="✅ TP2 HIT\n\n💰 Partial profits secured\n📈 Strong continuation")
