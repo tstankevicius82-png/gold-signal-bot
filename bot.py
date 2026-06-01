@@ -5,7 +5,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
 TOKEN = os.getenv("BOT_TOKEN")
 
-CHANNEL_ID = "@YOURCHANNELNAME"
+CHANNEL_ID = "@CARYPTOGOLDEDGE"
 
 
 # BUY SIGNAL
