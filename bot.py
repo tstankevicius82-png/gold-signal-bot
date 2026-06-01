@@ -1,24 +1,17 @@
-import os
 from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes
+import os
 
-TOKEN = os.getenv("BOT_TOKEN")
-
-# BUY COMMAND
+TOKEN=os.getenv("BOT_TOKEN")
 
 async def buy(update: Update, context: ContextTypes.DEFAULT_TYPE):
+entry=float(context.args[0])
+tp1=entry+3
+tp2=entry+5
+tp3=entry+10
+sl=entry-5
 
-```
-entry = float(context.args[0])
-
-tp1 = entry + 3
-tp2 = entry + 5
-tp3 = entry + 10
-sl = entry - 5
-
-msg = f"""
-```
-
+msg=f"""
 📊 GOLD SIGNAL — XAU/USD
 
 🟢 BUY
@@ -36,25 +29,16 @@ msg = f"""
 #gold #xauusd
 """
 
-```
 await update.message.reply_text(msg)
-```
-
-# SELL COMMAND
 
 async def sell(update: Update, context: ContextTypes.DEFAULT_TYPE):
+entry=float(context.args[0])
+tp1=entry-3
+tp2=entry-5
+tp3=entry-10
+sl=entry+5
 
-```
-entry = float(context.args[0])
-
-tp1 = entry - 3
-tp2 = entry - 5
-tp3 = entry - 10
-sl = entry + 5
-
-msg = f"""
-```
-
+msg=f"""
 📊 GOLD SIGNAL — XAU/USD
 
 🔴 SELL
@@ -72,13 +56,11 @@ msg = f"""
 #gold #xauusd
 """
 
-```
 await update.message.reply_text(msg)
-```
 
-app = Application.builder().token(TOKEN).build()
+app=Application.builder().token(TOKEN).build()
 
-app.add_handler(CommandHandler("buy", buy))
-app.add_handler(CommandHandler("sell", sell))
+app.add_handler(CommandHandler("buy",buy))
+app.add_handler(CommandHandler("sell",sell))
 
 app.run_polling()
